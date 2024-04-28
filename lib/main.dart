@@ -1,10 +1,17 @@
 import 'package:chatapp/pages/login_page.dart';
 import 'package:chatapp/utils.dart';
-// import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+// ...
 
 void main() async {
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+
   await setup();
   runApp(const MyApp());
 }

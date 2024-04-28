@@ -11,14 +11,15 @@ class AuthService {
 
   Future<bool> login(String email, String password) async {
     try {
-      final Credential = await _firebaseAuth.signInWithEmailAndPassword(
+      final credential = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      if (Credential.user != null) {
-        _user = Credential.user;
+      if (credential.user != null) {
+        _user = credential.user;
         return true;
       }
     } catch (e) {
-      print(e);
+      print("Error logging in: $e");
+      // Handle different types of errors here
     }
     return false;
   }
