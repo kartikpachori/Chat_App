@@ -1,7 +1,7 @@
 import 'package:chatapp/Widgets/custom_form_field.dart';
 import 'package:chatapp/consts.dart';
+import 'package:chatapp/services/navigation_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:chatapp/services/auth_service.dart';
 
@@ -17,12 +17,14 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _loginFormKey = GlobalKey();
 
   late AuthService _authService;
+  late NavigationService _navigationService;
   String? email, password;
 
   @override
   void initState() {
     super.initState();
     _authService = _getIt.get<AuthService>();
+    _navigationService = _getIt.get<NavigationService>();
   }
 
   @override
@@ -72,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
               bool result = await _authService.login(email!, password!);
               print(result);
               if (result) {
+                _navigationService.pushReplacementNamed("/home");
               } else {
                 // Show an error message to the user
                 ScaffoldMessenger.of(context).showSnackBar(

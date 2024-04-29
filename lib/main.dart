@@ -1,19 +1,12 @@
-import 'package:chatapp/pages/login_page.dart';
+import 'package:chatapp/services/navigation_service.dart';
 import 'package:chatapp/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-
-// ...
 
 void main() async {
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
-
   await setup();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 Future<void> setup() async {
@@ -22,11 +15,18 @@ Future<void> setup() async {
   await registerServices();
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final GetIt _getIt = GetIt.instance;
+  late NavigationService _navigationService;
+
+  MyApp({super.key}) {
+    _navigationService = _getIt.get<NavigationService>();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: _navigationService.navigatorkey,
       debugShowCheckedModeBanner: false,
       title: 'Chat App',
       theme: ThemeData(
@@ -34,7 +34,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.montserratTextTheme(),
       ),
-      home: LoginPage(),
+      initialRoute: "/login",
+      routes: _navigationService.routes,
     );
   }
 }
