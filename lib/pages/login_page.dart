@@ -75,12 +75,7 @@ class _LoginPageState extends State<LoginPage> {
               print(result);
               if (result) {
                 _navigationService.pushReplacementNamed("/home");
-              } else {
-                // Show an error message to the user
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Login failed. Please try again.')),
-                );
-              }
+              } else {}
             }
           },
           color: Theme.of(context).colorScheme.primary,
