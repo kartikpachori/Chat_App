@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:chatapp/consts.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -8,6 +11,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  File? selectedImage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +80,11 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget _pfpSelectionFiled() {
-    return CircleAvatar();
+    return CircleAvatar(
+      radius: MediaQuery.of(context).size.width * 0.15,
+      backgroundImage: selectedImage != null
+          ? FileImage(selectedImage!)
+          : NetworkImage(PLACEHOLDER_PFP) as ImageProvider,
+    );
   }
 }
