@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:chatapp/Widgets/custom_form_field.dart';
+import 'package:chatapp/services/auth_service.dart';
 import 'package:chatapp/services/media_services.dart';
 import 'package:chatapp/consts.dart';
 import 'package:chatapp/services/navigation_service.dart';
@@ -15,8 +16,11 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final GetIt _getIt = GetIt.instance;
+  final GlobalKey<FormState> _registerFormKey = GlobalKey();
   late MediaService _mediaService;
   late NavigationService _navigationService;
+  late AuthService _authService;
+  bool isLoading = false;
 
   String? email, password, name;
   File? selectedImage;
@@ -26,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
     super.initState();
     _mediaService = _getIt.get<MediaService>();
     _navigationService = _getIt.get<NavigationService>();
+    _authService = _getIt.get<AuthService>();
   }
 
   @override
@@ -39,17 +44,24 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget _buildUI() {
     return SafeArea(
       child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 15.0,
-            vertical: 20.0,
-          ),
-          child: Column(
-            children: [
-              _headerText(),
-              _registerForm(),
-              _loginAccountLink(),
-            ],
-          )),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 15.0,
+          vertical: 20.0,
+        ),
+        child: Column(
+          children: [
+            _headerText(),
+            if (!isLoading) _registerForm(),
+            if (!isLoading) _loginAccountLink(),
+            if (isLoading)
+              const Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -88,6 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
         vertical: MediaQuery.sizeOf(context).height * 0.05,
       ),
       child: Form(
+        key: _registerFormKey,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -122,6 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
               hintText: "Password",
               height: MediaQuery.sizeOf(context).height * 0.1,
               validationRegEx: PASSWORD_VALIDATION_REGEX,
+              obscureText: true,
               onSaved: (value) {
                 setState(
                   () {
@@ -161,7 +175,25 @@ class _RegisterPageState extends State<RegisterPage> {
       width: MediaQuery.sizeOf(context).width,
       child: MaterialButton(
         color: Theme.of(context).colorScheme.primary,
-        onPressed: () {},
+        onPressed: () async {
+          setState(() {
+            isLoading = true;
+          });
+          try {
+            if ((_registerFormKey.currentState?.validate() ?? false) &&
+                selectedImage != null) {
+              _registerFormKey.currentState?.save();
+              bool result = await _authService.signup(email!, password!);
+              if (result) {}
+              print(result);
+            }
+          } catch (e) {
+            print(e);
+          }
+          setState(() {
+            isLoading = false;
+          });
+        },
         child: Text(
           "Register",
           style: TextStyle(color: Colors.white),
