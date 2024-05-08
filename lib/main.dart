@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: _navigationService.navigatorkey,
       debugShowCheckedModeBanner: false,
-      title: 'Chatt App',
+      title: 'Chatting App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
