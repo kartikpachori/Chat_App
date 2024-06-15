@@ -2,15 +2,17 @@
 
 A new Flutter project.
 
-## Getting Started
+## Contributing
 
-This project is a starting point for a Flutter application.
+Contributions are welcome! Please fork the repository and submit a pull request with your proposed changes.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+##Screenshot
+
+<span>
+<img src="[https://github.com/kartikpachori/Chat_App/blob/main/assets/images/Pick1.jpg" width="18%" height="45%">
+<img src="https://github.com/kartikpachori/Chat_App/blob/main/assets/images/Pick2.jpg" width="18%" height="45%">
+<img src="https://github.com/kartikpachori/Chat_App/blob/main/assets/images/Pick3.jpg" width="18%" height="45%">
+<img src="https://github.com/kartikpachori/Chat_App/blob/main/assets/images/Pick4.jpg" width="18%" height="45%">
+</span>
