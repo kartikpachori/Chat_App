@@ -35,11 +35,11 @@ Chat is a real-time messaging application built using Flutter. Users can log in,
 ## Directory Structure
 
 lib/
-|-- models/           # Data models for user and message
-|-- screens/          # UI screens for login, registration, user list, chat
-|-- services/         # Services for authentication, messaging, and photo upload
-|-- widgets/          # Reusable UI components
-|-- main.dart         # Entry point of the application
+- |-- models/           # Data models for user and message
+- |-- screens/          # UI screens for login, registration, user list, chat
+- |-- services/         # Services for authentication, messaging, and photo upload
+- |-- widgets/          # Reusable UI components
+- |-- main.dart         # Entry point of the application
 
 ### Future Enhancements
 - Group Chats: Allow users to create and join group chats.
